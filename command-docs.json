@@ -81,5 +81,208 @@
         "demoOutput": ["/"]
       }
     }
+  },
+  "pwd": {
+    "summary": "Prints the name of the current working directory.",
+    "options": {
+      "(default)": {
+        "description": "Shows the full path of the current directory.",
+        "demoOutput": ["/home/user/bash-explorer"]
+      }
+    }
+  },
+  "cat": {
+    "summary": "Concatenates and displays file content.",
+    "options": {
+      "(default)": {
+        "description": "Prints the content of a file to the terminal.",
+        "demoOutput": ["Hello world!", "This is a text file."]
+      },
+      "-n": {
+        "description": "Numbers all output lines.",
+        "demoOutput": ["     1\tHello world!", "     2\tThis is a text file."]
+      },
+      "-b": {
+        "description": "Numbers non-blank output lines.",
+        "demoOutput": ["     1\tHello world!", "", "     2\tThis is a text file."]
+      }
+    }
+  },
+  "mkdir": {
+    "summary": "Creates new directories.",
+    "options": {
+      "(default)": {
+        "description": "Creates a new directory with the specified name.",
+        "demoOutput": [""]
+      },
+      "-p": {
+        "description": "Creates parent directories as needed.",
+        "demoOutput": [""]
+      },
+      "-v": {
+        "description": "Displays a message for every directory created.",
+        "demoOutput": ["mkdir: created directory 'projects'", "mkdir: created directory 'projects/web'"]
+      }
+    }
+  },
+  "touch": {
+    "summary": "Updates file timestamps or creates empty files.",
+    "options": {
+      "(default)": {
+        "description": "Creates an empty file if it doesn't exist.",
+        "demoOutput": [""]
+      }
+    }
+  },
+  "rm": {
+    "summary": "Removes files or directories.",
+    "options": {
+      "(default)": {
+        "description": "Deletes the specified file.",
+        "demoOutput": [""]
+      },
+      "-r": {
+        "description": "Removes directories and their contents recursively.",
+        "demoOutput": [""]
+      },
+      "-f": {
+        "description": "Ignores nonexistent files and never prompts for confirmation.",
+        "demoOutput": [""]
+      },
+      "-v": {
+        "description": "Explains what is being done.",
+        "demoOutput": ["removed 'old_script.sh'"]
+      }
+    }
+  },
+  "cp": {
+    "summary": "Copies files and directories.",
+    "options": {
+      "(default)": {
+        "description": "Copies a file to a new location.",
+        "demoOutput": [""]
+      },
+      "-r": {
+        "description": "Copies directories recursively.",
+        "demoOutput": [""]
+      },
+      "-i": {
+        "description": "Prompts before overwriting an existing file.",
+        "demoOutput": ["cp: overwrite 'backup.txt'? "]
+      },
+      "-v": {
+        "description": "Shows files as they are copied.",
+        "demoOutput": ["'main.js' -> 'main.js.bak'"]
+      }
+    }
+  },
+  "mv": {
+    "summary": "Moves or renames files and directories.",
+    "options": {
+      "(default)": {
+        "description": "Moves a file to a new location or renames it.",
+        "demoOutput": [""]
+      },
+      "-i": {
+        "description": "Prompts before overwriting an existing file.",
+        "demoOutput": ["mv: overwrite 'config.json'? "]
+      },
+      "-v": {
+        "description": "Shows files as they are moved.",
+        "demoOutput": ["'data.tmp' -> 'data.json'"]
+      }
+    }
+  },
+  "grep": {
+    "summary": "Searches for patterns within files.",
+    "options": {
+      "(default)": {
+        "description": "Prints lines matching the pattern.",
+        "demoOutput": ["const grid = document.getElementById(\"optionsGrid\");"]
+      },
+      "-i": {
+        "description": "Ignores case distinctions in patterns.",
+        "demoOutput": ["const Grid = document.getElementById(\"optionsGrid\");", "let commandCards = [];"]
+      },
+      "-v": {
+        "description": "Inverts the match, showing lines that do not match the pattern.",
+        "demoOutput": ["<html>", "  <body>", "  </body>", "</html>"]
+      },
+      "-n": {
+        "description": "Prefixes each line of output with the line number.",
+        "demoOutput": ["42:const grid = document.getElementById(\"optionsGrid\");"]
+      },
+      "-r": {
+        "description": "Searches for the pattern recursively.",
+        "demoOutput": ["index.js:const grid = document.getElementById(\"optionsGrid\");", "index.html:    <section class=\"grid\" id=\"optionsGrid\"></section>"]
+      }
+    }
+  },
+  "chmod": {
+    "summary": "Changes the file mode bits of each given file.",
+    "options": {
+      "(default)": {
+        "description": "Changes permissions of a file.",
+        "demoOutput": [""]
+      },
+      "+x": {
+        "description": "Adds execute permission to the file.",
+        "demoOutput": [""]
+      },
+      "755": {
+        "description": "Sets permissions to rwxr-xr-x.",
+        "demoOutput": [""]
+      },
+      "644": {
+        "description": "Sets permissions to rw-r--r--.",
+        "demoOutput": [""]
+      }
+    }
+  },
+  "curl": {
+    "summary": "Transfers data from or to a server.",
+    "options": {
+      "(default)": {
+        "description": "Fetches the content of a URL.",
+        "demoOutput": ["<!DOCTYPE html>", "<html>", "<head>...", "</html>"]
+      },
+      "-I": {
+        "description": "Fetch the HTTP-header only.",
+        "demoOutput": ["HTTP/1.1 200 OK", "Content-Type: text/html", "Server: nginx"]
+      },
+      "-L": {
+        "description": "Follow redirects.",
+        "demoOutput": ["HTTP/1.1 301 Moved Permanently", "Location: https://example.com/", "", "HTTP/1.1 200 OK"]
+      },
+      "-o": {
+        "description": "Write output to a file.",
+        "demoOutput": ["  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current", "                                 Dload  Upload   Total   Spent    Left  Speed", "100  1256  100  1256    0     0   5234      0 --:--:-- --:--:-- --:--:--  5233"]
+      }
+    }
+  },
+  "git": {
+    "summary": "The stupid content tracker (version control system).",
+    "options": {
+      "status": {
+        "description": "Show the working tree status.",
+        "demoOutput": ["On branch main", "Your branch is up to date with 'origin/main'.", "", "nothing to commit, working tree clean"]
+      },
+      "add": {
+        "description": "Add file contents to the index.",
+        "demoOutput": [""]
+      },
+      "commit": {
+        "description": "Record changes to the repository.",
+        "demoOutput": ["[main 4a2b3c4] Update command docs", " 1 file changed, 150 insertions(+)"]
+      },
+      "push": {
+        "description": "Update remote refs along with associated objects.",
+        "demoOutput": ["Enumerating objects: 5, done.", "Counting objects: 100% (5/5), done.", "Writing objects: 100% (3/3), 320 bytes | 320.00 KiB/s, done.", "To github.com:user/repo.git", "   4a2b3c4..5d6e7f8  main -> main"]
+      },
+      "pull": {
+        "description": "Fetch from and integrate with another repository or a local branch.",
+        "demoOutput": ["Updating 4a2b3c4..5d6e7f8", "Fast-forward", " command-docs.json | 20 ++++++++", " 1 file changed, 20 insertions(+)"]
+      }
+    }
   }
 }
