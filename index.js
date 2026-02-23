@@ -25,7 +25,13 @@ const grid = document.getElementById("optionsGrid");
           ? meta.options
           : { "(default)": "Runs command with default behavior." };
 
-        Object.entries(optionMap).forEach(([option, detail]) => {
+        Object.entries(optionMap).forEach(([option, optionValue]) => {
+          const detail = typeof optionValue === "string"
+            ? optionValue
+            : (optionValue.description || "No additional option details available.");
+          const demoOutput = Array.isArray(optionValue?.demoOutput)
+            ? optionValue.demoOutput
+            : (typeof optionValue?.demoOutput === "string" ? [optionValue.demoOutput] : []);
           const raw = option === "(default)" ? command : `${command} ${option}`;
           cards.push({
             section: `${command} command`,
@@ -33,7 +39,8 @@ const grid = document.getElementById("optionsGrid");
             option,
             detail: detail || "No additional option details available.",
             summary: meta.summary || `Runs the ${command} command.`,
-            raw
+            raw,
+            demoOutput
           });
         });
       });
@@ -99,11 +106,11 @@ const grid = document.getElementById("optionsGrid");
     }
 
     function getDemoOutput(item) {
-      return [
-        item.summary,
-        item.detail,
-        "(Output preview)"
-      ];
+      if (Array.isArray(item.demoOutput) && item.demoOutput.length > 0) {
+        return item.demoOutput;
+      }
+
+      return [item.detail];
     }
 
     function sleep(ms) {

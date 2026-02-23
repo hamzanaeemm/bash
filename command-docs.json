@@ -2,33 +2,84 @@
   "ls": {
     "summary": "Lists directory contents.",
     "options": {
-      "(default)": "Shows files and folders in the current directory.",
-      "-l": "Long format listing with permissions, owner, size, and time.",
-      "-a": "Includes hidden files (dotfiles).",
-      "-h": "Human-readable sizes, commonly with -l.",
-      "-t": "Sorts by modification time (newest first).",
-      "-r": "Reverses the sort order.",
-      "-R": "Recursively lists subdirectories.",
-      "-S": "Sorts by file size (largest first).",
-      "-1": "Shows one entry per line.",
-      "-d": "Lists directories themselves, not their contents.",
-      "-F": "Appends type indicators such as /, *, or @."
+      "(default)": {
+        "description": "Shows files and folders in the current directory.",
+        "demoOutput": ["README.md  script.sh  index.html  index.js"]
+      },
+      "-l": {
+        "description": "Long format listing with permissions, owner, size, and time.",
+        "demoOutput": ["-rw-r--r--  1 user  staff  1324 Feb 23 README.md", "-rwxr-xr-x  1 user  staff  2461 Feb 23 script.sh"]
+      },
+      "-a": {
+        "description": "Includes hidden files (dotfiles).",
+        "demoOutput": [".", "..", ".git", ".gitignore", "README.md", "script.sh"]
+      },
+      "-h": {
+        "description": "Human-readable sizes, commonly with -l.",
+        "demoOutput": ["4.0K README.md", "8.0K script.sh", "12K index.js"]
+      },
+      "-t": {
+        "description": "Sorts by modification time (newest first).",
+        "demoOutput": ["index.js", "index.html", "script.sh", "README.md"]
+      },
+      "-r": {
+        "description": "Reverses the sort order.",
+        "demoOutput": ["script.sh", "index.js", "index.html", "README.md"]
+      },
+      "-R": {
+        "description": "Recursively lists subdirectories.",
+        "demoOutput": [".", "README.md", "script.sh", "./assets:", "logo.svg"]
+      },
+      "-S": {
+        "description": "Sorts by file size (largest first).",
+        "demoOutput": ["index.js", "index.html", "script.sh", "README.md"]
+      },
+      "-1": {
+        "description": "Shows one entry per line.",
+        "demoOutput": ["README.md", "index.html", "index.js", "script.sh"]
+      },
+      "-d": {
+        "description": "Lists directories themselves, not their contents.",
+        "demoOutput": ["/"]
+      },
+      "-F": {
+        "description": "Appends type indicators such as /, *, or @.",
+        "demoOutput": ["README.md", "script.sh*", "assets/"]
+      }
     }
   },
   "echo": {
     "summary": "Prints text to the terminal.",
     "options": {
-      "(default)": "Prints text exactly as given.",
-      "-e": "Enables escape sequences like \\n for new lines."
+      "(default)": {
+        "description": "Prints text exactly as given.",
+        "demoOutput": ["Hello, World!"]
+      },
+      "-e": {
+        "description": "Enables escape sequences like \\n for new lines.",
+        "demoOutput": ["Hello,", "World!"]
+      }
     }
   },
   "cd": {
     "summary": "Changes the current directory.",
     "options": {
-      "(default)": "Changes to the specified path.",
-      "~": "Changes to the home directory.",
-      "..": "Changes to the parent directory.",
-      "/": "Changes to the root directory."
+      "(default)": {
+        "description": "Changes to the specified path.",
+        "demoOutput": ["Directory changed successfully."]
+      },
+      "~": {
+        "description": "Changes to the home directory.",
+        "demoOutput": ["/Users/username"]
+      },
+      "..": {
+        "description": "Changes to the parent directory.",
+        "demoOutput": ["Moved to parent directory."]
+      },
+      "/": {
+        "description": "Changes to the root directory.",
+        "demoOutput": ["/"]
+      }
     }
   }
 }
