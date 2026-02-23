@@ -117,6 +117,48 @@
       font-weight: 700;
     }
 
+    .command-box.filter-bar::before {
+      content: "";
+      margin-right: 0;
+    }
+
+    .filter-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .filter-btn {
+      border: 1px solid #2a4167;
+      background: #101d35;
+      color: #d9e8ff;
+      border-radius: 999px;
+      padding: 0.4rem 0.72rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent-2);
+      transform: translateY(-1px);
+    }
+
+    .filter-btn.active {
+      border-color: var(--accent);
+      background: rgba(93, 242, 162, 0.14);
+      color: #eafff4;
+    }
+
     .command-box code,
     .option-card code,
     .overlay-panel code {
@@ -290,7 +332,11 @@
         <h1>Interactive Bash Command Explorer</h1>
         <p class="subtitle">Hover any command option to see details in the info pane.</p>
 
-        <div class="command-box"><code id="metaInfo">Parsing command options from script...</code></div>
+        <div class="command-box filter-bar">
+          <div class="filter-wrap" id="commandFilters">
+            <span class="filter-label">Commands</span>
+          </div>
+        </div>
 
         <section class="grid" id="optionsGrid"></section>
         <p class="hint">Tip: pause cursor on a command card to open details overlay, move away to close, click to copy.</p>
@@ -373,7 +419,7 @@ ls -F
     };
 
     const grid = document.getElementById("optionsGrid");
-    const metaInfo = document.getElementById("metaInfo");
+    const commandFilters = document.getElementById("commandFilters");
     const hoverBackdrop = document.getElementById("hoverBackdrop");
     const hoverOverlay = document.getElementById("hoverOverlay");
     const overlayTitle = document.getElementById("overlayTitle");
@@ -387,6 +433,7 @@ ls -F
     let demoRunId = 0;
     let overlayHideTimer = null;
     let overlayShowTimer = null;
+    let selectedCommand = "";
 
     function normalizeOption(command, args) {
       if (!args || !args.length) {
@@ -611,10 +658,24 @@ ls -F
     }
 
     const commandCards = parseScript(scriptSource);
-    const commandList = [...new Set(commandCards.map((item) => item.command))].join(", ");
-    metaInfo.textContent = `Commands found: ${commandList} | Unique command-options: ${commandCards.length}`;
 
-    commandCards.forEach((item) => {
+    const commands = [...new Set(commandCards.map((item) => item.command))];
+
+    function setActiveFilterButton() {
+      const buttons = commandFilters.querySelectorAll(".filter-btn");
+      buttons.forEach((button) => {
+        const isActive = button.dataset.command === selectedCommand;
+        button.classList.toggle("active", isActive);
+      });
+    }
+
+    function renderCards() {
+      grid.innerHTML = "";
+      closeInfoOverlay();
+
+      const visibleCards = commandCards.filter((item) => item.command === selectedCommand);
+
+      visibleCards.forEach((item) => {
       const card = document.createElement("article");
       card.className = "option-card";
       card.tabIndex = 0;
@@ -633,6 +694,29 @@ ls -F
 
       grid.appendChild(card);
     });
+    }
+
+    function renderFilters() {
+      commands.forEach((command) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "filter-btn";
+        button.dataset.command = command;
+        button.textContent = command;
+        button.addEventListener("click", () => {
+          selectedCommand = command;
+          setActiveFilterButton();
+          renderCards();
+        });
+        commandFilters.appendChild(button);
+      });
+
+      selectedCommand = commands[0] || "";
+      setActiveFilterButton();
+    }
+
+    renderFilters();
+    renderCards();
 
   </script>
 </body>
