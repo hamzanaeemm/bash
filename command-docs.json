@@ -1,0 +1,34 @@
+{
+  "ls": {
+    "summary": "Lists directory contents.",
+    "options": {
+      "(default)": "Shows files and folders in the current directory.",
+      "-l": "Long format listing with permissions, owner, size, and time.",
+      "-a": "Includes hidden files (dotfiles).",
+      "-h": "Human-readable sizes, commonly with -l.",
+      "-t": "Sorts by modification time (newest first).",
+      "-r": "Reverses the sort order.",
+      "-R": "Recursively lists subdirectories.",
+      "-S": "Sorts by file size (largest first).",
+      "-1": "Shows one entry per line.",
+      "-d": "Lists directories themselves, not their contents.",
+      "-F": "Appends type indicators such as /, *, or @."
+    }
+  },
+  "echo": {
+    "summary": "Prints text to the terminal.",
+    "options": {
+      "(default)": "Prints text exactly as given.",
+      "-e": "Enables escape sequences like \\n for new lines."
+    }
+  },
+  "cd": {
+    "summary": "Changes the current directory.",
+    "options": {
+      "(default)": "Changes to the specified path.",
+      "~": "Changes to the home directory.",
+      "..": "Changes to the parent directory.",
+      "/": "Changes to the root directory."
+    }
+  }
+}
