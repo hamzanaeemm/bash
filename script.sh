@@ -24,3 +24,5 @@ echo -e "\nList directory - List directories themselves, not their contents:"
 ls -d /*
 echo -e "\nList directory - Append indicator (one of */=@|) to entries:"
 ls -F
+
+#cd - Change directory
